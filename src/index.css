@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #0a1628;
+  --color-navy-deep: #060d18;
+  --color-steel: #1b3a5e;
+  --color-surface: #0d1f3c;
+  --color-emerald: #00c48c;
+  --color-emerald-dark: #05a575;
+  --color-ink: #f0f4f8;
+  --color-muted: #8ba5c0;
+  --color-line: #1e3250;
+
+  --font-display: "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--color-navy);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-emerald);
+  color: var(--color-navy-deep);
+}
+
+/* dot-grid texture used on dark sections */
+.grid-texture {
+  background-image: radial-gradient(var(--color-line) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* scroll reveal base state — JS toggles .is-visible */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 1px;
+  background: var(--color-emerald);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+.gradient-border {
+  position: relative;
+  border: 1px solid var(--color-line);
+  transition: border-color 0.3s ease;
+}
+.gradient-border:hover {
+  border-color: var(--color-emerald);
+}
